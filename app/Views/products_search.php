@@ -107,6 +107,29 @@
             cursor:pointer;
         }
 
+        a {
+            text-decoration: none;
+            color: rgba(33, 37, 41, 1);
+        }
+
+        .inner {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .inner a {
+            color: red;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .edit{
+            color: #1976D2 !important;
+        }
+
     </style>
 </head>
 <body>
@@ -129,8 +152,12 @@
                             <?php foreach ($cakes as $item): ?>
 
                                 <li>
-                                    <h2><?php echo $item['name'] ?></h2>
-                                    <p><?php echo $item['recipe'] ?></p>
+                                <div class="inner"><a href="<?php echo base_url('web/deleteProduct/'.$item['id']) ?>">Delete</a>  <a class="edit" href="<?php echo base_url('web/createProduct/'.$item['id']) ?>"> Edit</a></div>
+                            <a href="<?php echo base_url('web/viewProduct/'.$item['id']) ?>">
+                            <h2><?php echo $item['name'] ?></h2>
+                            <p><?php echo $item['recipe'] ?></p>
+                            </a>
+                          
                                   
                                    
                                     

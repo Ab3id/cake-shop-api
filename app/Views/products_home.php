@@ -19,12 +19,12 @@
 
         .main_body{
             width: 100%;
-            height: 100%;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            overflow: scroll;
+         
             gap: 5rem;
         }
 
@@ -111,12 +111,17 @@
             display: flex;
             justify-content: end;
             align-items: center;
+            gap: 10px;
         }
 
         .inner a {
             color: red;
             cursor: pointer;
             text-decoration: none;
+        }
+
+        .edit{
+            color: #1976D2 !important;
         }
     </style>
 </head>
@@ -126,6 +131,8 @@
 <div class="main_body">
     <h1>The CakeShop API</h1>
     <a href="<?php echo base_url('web/createProduct') ?>" class="price_section">Add Cake</a>
+
+    <a href="<?php echo base_url('web/search') ?>">Search Cakes</a>
     <?php 
         if(isset($message)){
             if($message == '1'){
@@ -137,7 +144,7 @@
                     <?php foreach ($cakes as $item): ?>
                        
                         <li>
-                            <div class="inner"><a href="<?php echo base_url('web/deleteProduct/'.$item['id']) ?>">Delete</a></div>
+                            <div class="inner"><a href="<?php echo base_url('web/deleteProduct/'.$item['id']) ?>">Delete</a>  <a class="edit" href="<?php echo base_url('web/createProduct/'.$item['id']) ?>"> Edit</a></div>
                             <a href="<?php echo base_url('web/viewProduct/'.$item['id']) ?>">
                             <h2><?php echo $item['name'] ?></h2>
                             <p><?php echo $item['recipe'] ?></p>

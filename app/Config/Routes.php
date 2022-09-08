@@ -59,8 +59,14 @@ $routes->get('client/api/product/(:num)', 'ProductsController::show/$1');
 $routes->post('client/api/product', 'ProductsController::store');
 $routes->delete('client/api/product/(:num)', 'ProductsController::destroy/$1');
 $routes->post('client/api/product/(:num)', 'ProductsController::update/$1');
+$routes->post('client/api/product/search','ProductsController::filter');
+
+//unprotected routes
+$routes->get('web/search','ProductsController::search');
 $routes->post('web/search','ProductsController::search');
 $routes->get('web/viewProduct/(:num)','ProductsController::ViewProduct/$1');
 $routes->get('web/createProduct','Home::create');
+$routes->get('web/createProduct/(:num)','Home::create/$1');
 $routes->post('web/createProduct','Home::store');
+$routes->post('web/updateProduct/(:num)','Home::update/$1');
 $routes->get('web/deleteProduct/(:num)','Home::destroy/$1');

@@ -22,8 +22,31 @@ class Home extends BaseController
         return view('products_home',$data);
     }
 
-    public function create()
+    public function create($id = '')
     {
+       if($id != ''){
+        try {
+
+            $model = new ProductsModel();
+            $cake = $model->findProductByID($id);
+            
+
+          
+            $data = [
+                'message' => '1',
+                'cake' => $cake
+            ];
+    
+            return view('add_product_view',$data);
+            
+        } catch (Exception $exception) {
+            $data = [
+                'message' => $exception->getMessage()
+            ];
+            var_dump($data);
+           // return redirect('/', 'refresh');
+        }
+       }
         return view('add_product_view');
     }
 
@@ -47,6 +70,28 @@ class Home extends BaseController
             
            
         }
+
+        return redirect('/', 'refresh');
+    }
+
+    public function update($id)
+    {
+      
+
+            $model = new ProductsModel();
+            $model->findProductByID($id);
+
+            $input =  $this->request->getJSON() ?? $this->request->getRawInput();
+            echo $id.'id';
+            var_dump($this->request);
+
+            $model->update($id, $input);
+          
+
+          
+            
+
+      
 
         return redirect('/', 'refresh');
     }

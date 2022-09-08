@@ -77,6 +77,26 @@ class ProductsController extends BaseController
         return view('products_search',$data);
     }
 
+    public function filter(){
+        try{
+            $model = new ProductsModel();
+            $val = $this->request->getVar('search_input');
+            $cakes = $model->findProductByCategory($val);
+            
+            $data =  [
+                'message' => '1',
+                'cakes' => $cakes
+            ]; 
+            return $this->respond($data,200);
+        }catch (Exception $e){
+            $data = [
+                'message' => 'Could not find product for specified name'
+            ];
+            return $this->respond($data,ResponseInterface::HTTP_NOT_FOUND);
+        }
+      
+    }
+
     public function ViewProduct($id)
     {
         try {

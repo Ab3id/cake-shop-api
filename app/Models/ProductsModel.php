@@ -35,7 +35,19 @@ class ProductsModel extends Model
             ->like(['name' => $val])
             ->findAll();
 
-        if (!$client) throw new Exception('Could not find product for specified ID');
+        if (!$client) throw new Exception('Could not find product for specified Name');
+
+        return $client;
+    }
+
+    public function findProductByCategory($val)
+    {
+        $client = $this
+            ->asArray()
+            ->like(['type' => $val])
+            ->findAll();
+
+        if (!$client) throw new Exception('Could not find product for specified Name');
 
         return $client;
     }

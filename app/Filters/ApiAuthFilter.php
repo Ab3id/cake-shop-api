@@ -15,7 +15,6 @@ class APIAuthFilter implements FilterInterface {
     public function before(RequestInterface $request, $arguments = null)
     {
         $authenticationHeader = $request->getHeaderLine('Api-Token');
-
         try {
             helper('auth');
             $encodedToken = getAccessTokenFromRequest($authenticationHeader);
