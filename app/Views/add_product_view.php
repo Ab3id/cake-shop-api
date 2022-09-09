@@ -80,11 +80,23 @@ textarea {
     align-items: center;
 }
 
+form{
+    width: 50%;
+}
+
 form div{
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
+.err{
+    color: red;
+}
+
+.recp{
+    display: flex;
+    flex-direction: column;
+}
 
 
     </style>
@@ -93,29 +105,52 @@ form div{
 <body>
     <section>
         <div class="main_content">
+           
            <div class="form_content">
-           <span><?php echo isset($cake) ?  'Edit Cake' :  'Create new cake' ?></span>
-            <form method="POST" action="<?php echo isset($cake) ? base_url('web/updateProduct/'.$cake['id']) : base_url('web/createProduct'); ?>">
+           <span><?php echo isset($cake['id']) ?  'Edit Cake' :  'Create new cake' ?></span>
+            <form method="POST" action="<?php echo isset($cake['id']) ? base_url('web/updateProduct/'.$cake['id']) : base_url('web/createProduct'); ?>">
                 <div>
                 <label for="name">Name</label>
+                <?php if(isset($message)){
+                if($message !== "1" && isset($message['name'])){
+                   
+                    echo "<p class='err'>".$message['name']."</p>";
+                    }
+                } ?>
                   <input type="text" required name="name" value="<?php echo isset($cake) ? $cake['name'] : '' ?>">
                 </div>
                 <div>
                 <label for="type">Type</label>
+                <?php if(isset($message)){
+                if($message !== "1" && isset($message['type'])){
+                    
+                    echo "<p class='err'>".$message['type']."</p>";
+                    }
+                } ?>
                   <input type="text" required name="type" value="<?php echo isset($cake) ? $cake['type'] : '' ?>">
                 </div>
                 <div>
                   
                     <label for="price">Price</label>
+
+                    <?php if(isset($message)){
+                if($message !== "1" && isset($message['price'])){
+                    echo "<p class='err'>".$message['price']."</p>";
+                    }
+                } ?>
                   
                   <input type="number" required name="price" value="<?php echo isset($cake) ? $cake['price'] : '' ?>">
                 </div>
 
-                <div>
+                <div class="recp">
                 
-                    <label for="price">Recipe</label>
-                  
-                  <textarea placeholder="Recipe" required name="recipe"> <?php echo isset($cake) ? $cake['recipe'] : '' ?> </textarea>
+                    <label for="recipe">Recipe</label>
+                    <?php if(isset($message)){
+                if($message !== "1" && isset($message['recipe'])){
+                    echo "<p class='err'>".$message['recipe']."</p>";
+                    }
+                } ?>
+                  <textarea placeholder="Recipe" required name="recipe"><?php echo isset($cake) ? $cake['recipe'] :  ''?></textarea>
                 </div>
 
                 <div class="ll">

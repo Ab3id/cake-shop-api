@@ -34,7 +34,8 @@ class Home extends BaseController
           
             $data = [
                 'message' => '1',
-                'cake' => $cake
+                'cake' => $cake,
+                
             ];
     
             return view('add_product_view',$data);
@@ -43,7 +44,7 @@ class Home extends BaseController
             $data = [
                 'message' => $exception->getMessage()
             ];
-            var_dump($data);
+           // var_dump($data);
            // return redirect('/', 'refresh');
         }
        }
@@ -82,8 +83,7 @@ class Home extends BaseController
             $model->findProductByID($id);
 
             $input =  $this->request->getJSON() ?? $this->request->getRawInput();
-            echo $id.'id';
-            var_dump($this->request);
+         
 
             $model->update($id, $input);
           
@@ -112,11 +112,18 @@ class Home extends BaseController
 
 
         if (!$this->validateRequest($input, $rules)) {
-            return $this
-                ->respond(
-                    $this->validator->getErrors(),
-                    ResponseInterface::HTTP_BAD_REQUEST
-                );
+            $data = [
+                'message' =>  $this->validator->getErrors(),
+                'cake' => $input
+               
+            ];
+    
+            return view('add_product_view',$data);
+            // return $this
+            //     ->respond(
+            //         $this->validator->getErrors(),
+            //         ResponseInterface::HTTP_BAD_REQUEST
+            //     );
         }
 
         $model = new ProductsModel();
